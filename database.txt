@@ -1,0 +1,8 @@
+a b 93843 c d e f f 0.2 555565.0 
+
+feafeafeafeafea feafa 79557 gjhk hjkjh hjkhk hkkjjk f 0.5 55.0 
+
+fefafe feafa 18192 hkhk hjl jl jl f 0.1 4546.0 
+
+occ akb 8432 fafea null null null p 0.5 0.0 0 0 
+

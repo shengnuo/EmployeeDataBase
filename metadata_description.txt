@@ -1,0 +1,39 @@
+Data of an employee, such as its metadata, photo, and others, are stored in its own folder. Name of an 
+employee data folder is in the format of FIRST_LAST, where FIRST  represents the first name of 
+an employee and LAST represents the last name of an employee. Each employee's metadata is named as FIRST_LAST.dat. 
+Photo of each employee is named as FIRST_LAST.png
+ 
+Format of metadata:
+LOCATION_OF_PICTURE
+FIRST_NAME 
+LAST_NAME
+BIRTHDAY
+PHONE
+EMAIL
+ADDRESS
+EMPLOYEE_NUMBER
+TITLE
+DEPARTMENT
+EMPLOYEE_TYPE (full/part)
+SALARY/WAGE
+HOURS_PER_WEEK
+WEEKS_PER_MONTH
+DEDUCTION_RATE
+
+
+Sample metadata:
+./John_Smith.png
+John
+Smith
+01/01/2001
+1234567890
+john.smith@something.com
+123 Sesame st.
+1234567890
+IT Consultant
+Development team
+part
+35.79
+20
+40
+32
