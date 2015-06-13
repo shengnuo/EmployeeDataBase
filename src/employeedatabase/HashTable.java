@@ -7,57 +7,71 @@
 package employeedatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
  * @author slin
+ * @param <Key>
+ * @param <Value>
  */
-public class HashTable {
+public class HashTable<Key, Value> {
     private static final int BUCKET_SIZE = 6;
-    private ArrayList<Employee>[] table = new ArrayList[BUCKET_SIZE];
+    private ArrayList<LinkedList<Pair>> table = new ArrayList<LinkedList<Pair>> ();
     
-    HashTable() {
-        for (int i=0; i<BUCKET_SIZE; i++)
-            table[i]=new ArrayList();
-    }
-    
-    private int getIndex(int key) {
-        return (key % table.length);
-    }
-    
-    void add(Employee e) {
-        table[getIndex(e.getEmpNum())].add(e);
-    }
-    
-    void add(int key, Employee e) {
-        table[getIndex(key)].add(e);
-    }
-    
-    int search(int key) {
-        for (int i=0; i<table[getIndex(key)].size();i++) {
-            if (key==table[getIndex(key)].get(i).getEmpNum())
-                return(i);
+    private class Pair {
+        private Key k;
+        private Value v;
+        
+        public Pair(Key k, Value v) {
+            this.k = k;
+            this.v = v;
         }
-        return -1;
+        
+        @SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object o) {
+            return o!=null&&(o==this||(o.getClass()==getClass()&&((Pair)o).k.equals(k)));
+	}
+    }
+    HashTable() {
+        for (int i=0; i<BUCKET_SIZE; ++i)
+            table.add(new LinkedList<Pair>());
     }
     
-    Employee get (int key) {
-        if (search(key)!=-1)
-            return (table[getIndex(key)].get(search(key)));
+    public boolean contains(Key k) {
+        return table.get(getIndex(k)).contains(new Pair(k,null));
+    }
+    private int getIndex(Key k) {
+        return Math.abs(k.hashCode())%BUCKET_SIZE;
+    }
+    
+    public void add(Key k, Value element) {
+        if(!contains(k)) {
+            table.get(getIndex(k)).add(new Pair(k, element));
+        }
+    }
+    
+    public Value get (Key k) {
+        if(contains(k)) {
+            for(Pair element : table.get(getIndex(k))) {
+                if(element.k.equals(k))
+                    return element.v;
+            }
+        }
         return null;
     }
     
-    void remove(int key) {
-        if(search(key)>0)
-            table[getIndex(key)].remove(search(key));
+    public void remove(Key k) {
+        table.get(getIndex(k)).remove(new Pair(k,null));
     }
     
-    void replace(int key, Employee newEmp) {
-        try {
-            table[getIndex(key)].set(search(key), newEmp);
+    void replace(Key k, Value element) {
+        for(Pair e : table.get(getIndex(k))) {
+            if(e.k.equals(k)){
+                e.v = element;
+            }
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(getIndex(key)+" "+search(key));
-        }
-    }   
+    }
+    
 }

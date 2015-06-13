@@ -14,7 +14,7 @@ public class PartTimeEmployee extends Employee {
     private double wage;    
     private int hoursPerWeek, weeksPerYear;
  
-    PartTimeEmployee(String fName, String lName, int empNo, String phone, String email, String title, String department, double dRate, double w, int hpw, int wpy) {
+    public PartTimeEmployee(String fName, String lName, int empNo, String phone, String email, String title, String department, double dRate, double w, int hpw, int wpy) {
         super(fName, lName, empNo, phone, email, title, department, dRate);
         wage=w;
         hoursPerWeek=hpw;
